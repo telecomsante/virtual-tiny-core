@@ -43,7 +43,7 @@ The last command will prompt for a new passwd for the *tc* user, this is mandato
 
 Login from the **host** to the **guest** through *ssh*:
 ```bash
-ssh -p 2222 tc@127.0.0.1
+ssh -p 2222 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no tc@127.0.0.1
 ```
 
 ## Hard drive install
