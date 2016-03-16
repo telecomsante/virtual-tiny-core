@@ -99,10 +99,15 @@ cat << EOS | sudo tee -a /opt/bootsync.sh
 /usr/local/etc/init.d/openssh start
 EOS
 filetool.sh -b
-
+sudo poweroff
 ```
 
-The *ssh* service should now be available after a reboot.
+The *ssh* service should now be available across boots.
+
+Export the guest to an OVA file:
+```bash
+VBoxManage export C0r3 --output C0r3.ova --options manifest
+```
 
 ## Sources
 
