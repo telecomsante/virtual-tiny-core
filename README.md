@@ -18,8 +18,8 @@ curl -O http://tinycorelinux.net/7.x/x86_64/release/CorePure64-7.0.iso
 VBoxManage createvm --name C0r3 --ostype Linux26_64 --register
 VBoxManage modifyvm C0r3 --vram 10
 VBoxManage storagectl C0r3 --name SATA --add sata --controller IntelAhci --portcount 1 --bootable on
-VBoxManage createhd --filename "$(VBoxManage list systemproperties | awk -F ': +' '/^Default machine folder/{print $2}')/C0r3.vdi" --size 512
-VBoxManage storageattach C0r3 --storagectl SATA --port 0 --type hdd --medium "$(VBoxManage list systemproperties | awk -F ': +' '/^Default machine folder/{print $2}')/C0r3.vdi"
+VBoxManage createhd --filename "$(VBoxManage list systemproperties | awk -F ': +' '/^Default machine folder/{print $2}')/C0r3/C0r3.vdi" --size 512
+VBoxManage storageattach C0r3 --storagectl SATA --port 0 --type hdd --medium "$(VBoxManage list systemproperties | awk -F ': +' '/^Default machine folder/{print $2}')/C0r3/C0r3.vdi"
 VBoxManage storagectl C0r3 --name IDE --add ide --bootable on
 VBoxManage storageattach C0r3 --storagectl IDE --port 0 --device 0 --type dvddrive --medium CorePure64-7.0.iso
 VBoxManage modifyvm C0r3 --nic1 nat
