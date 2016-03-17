@@ -1,6 +1,6 @@
 # Tiny Core on VirtualBox
 
-The goal of this procedure is to obtain a [Tiny Core Linux](http://tinycorelinux.net/) guest under [VirtualBox](https://www.virtualbox.org/).
+The goal of this procedure is to obtain an OVA file of a [Tiny Core Linux](http://tinycorelinux.net/) guest under [VirtualBox](https://www.virtualbox.org/).
 
 This procedure was tested successfully with the following configuration:
 
@@ -79,6 +79,17 @@ sudo chroot /mnt/sda1
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 exit
+for i in /mnt/sda1/tmp/tcloop/*; do sudo umount $i; done
+for i in bin dev etc lib proc run sbin sys tmp usr var; do sudo umount /mnt/sda1/$i; sudo rmdir /mnt/sda1/$i; done
+cat << EOS | sudo tee -a /opt/.filetool.lst
+/etc/shadow
+/usr/local/etc/ssh
+EOS
+cat << EOS | sudo tee -a /opt/bootsync.sh
+/usr/local/etc/init.d/openssh start
+EOS
+sudo tar cf - -C /tmp/tce . | sudo tar xf - -C /mnt/sda1/tce
+filetool.sh -b /dev/sda1/tce
 sudo poweroff
 ```
 
@@ -87,28 +98,8 @@ sudo poweroff
 Once the *ssh* session is closed:
 ```bash
 VBoxManage storagectl C0r3 --name IDE --remove
-VBoxManage startvm C0r3
-```
-
-Execute again the steps from the [SSH access](#ssh-access) section.
-Once the *ssh* log in is successful:
-```sh
-cat << EOS | sudo tee -a /opt/.filetool.lst
-/etc/shadow
-/usr/local/etc/ssh
-EOS
-cat << EOS | sudo tee -a /opt/bootsync.sh
-/usr/local/etc/init.d/openssh start
-EOS
-filetool.sh -b
-sudo poweroff
-```
-
-The *ssh* service should now be available across boots.
-
-Export the guest to an OVA file:
-```bash
 VBoxManage export C0r3 --output C0r3.ova --options manifest
+VBoxManage unregistervm C0r3 --delete
 ```
 
 ## Sources
