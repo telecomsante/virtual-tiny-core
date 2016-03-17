@@ -25,7 +25,7 @@ VBoxManage storageattach C0r3 --storagectl SATA --port 0 --type hdd --medium "$(
 VBoxManage storagectl C0r3 --name IDE --add ide --bootable on
 VBoxManage storageattach C0r3 --storagectl IDE --port 0 --device 0 --type dvddrive --medium CorePure64-7.0.iso
 VBoxManage modifyvm C0r3 --nic1 nat --nictype1 virtio
-VBoxManage modifyvm C0r3 --natpf1 "ssh,tcp,,2222,,22"
+VBoxManage modifyvm C0r3 --natpf1 "ssh,tcp,,7103,,22"
 VBoxManage startvm C0r3
 ```
 
@@ -45,7 +45,7 @@ The last command will prompt for a new passwd for the *tc* user, this is mandato
 
 Login from the **host** to the **guest** through *ssh*:
 ```bash
-ssh -p 2222 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no tc@127.0.0.1
+ssh -p 7103 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no tc@127.0.0.1
 ```
 
 ## Hard drive install
