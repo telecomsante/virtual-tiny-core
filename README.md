@@ -31,7 +31,7 @@ Once the **Tiny Core guest** presents the `boot:` prompt press the enter key or 
 
 ## SSH access
 
-Enter the following commands once the **Tiny Core** shell prompt is diplayed (`tc@box:~$`)
+Enter the following commands once the **Tiny Core** shell prompt is displayed (`tc@box:~$`)
 ```sh
 tce-load -wi openssh
 cd /usr/local/etc/ssh
