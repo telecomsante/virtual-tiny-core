@@ -8,6 +8,8 @@ This procedure was tested successfully with the following configuration:
 - VirtualBox 5.0.16-105871
 - GNU bash, version 4.3.42(1)-release (x86\_64-apple-darwin15.0.0)
 
+All commands to be executed on the **host** or through *ssh* on **guest** side can just be copy/pasted to the terminal (select the whole block of commands).
+
 Some accommodations might be relevant depending on the actual configuration it is operated on.
 
 ## VM setup
